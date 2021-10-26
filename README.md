@@ -1,4 +1,4 @@
-###в PhpStorm:
+### в PhpStorm:
 Settings -> Directories -><br>
 пометить <code>Excluded</code> папки:
 
@@ -24,18 +24,18 @@ Settings -> Directories -><br>
     frontend/tests
 
 
-###Создание нового подобного проекта:
+### Создание нового подобного проекта:
 
     composer global require “fxp/composer-asset-plugin:^1.3.1”
     composer create-project --prefer-dist yiisoft/yii2-app-advanced PROJECT_NAME
 
-#####не забыть:
+### не забыть:
 0:39, мой composer.json отличается:<br>
 <code>"codeception/base": "^2.2.3",</code><br>
 <code>"codeception/verify": "~0.3.1",</code><br><br>
 
 
-#####ДАЛЕЕ НЕ НУЖНО
+### ДАЛЕЕ НЕ НУЖНО
 
 <p align="center">
     <a href="https://github.com/yiisoft" target="_blank">
