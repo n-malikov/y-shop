@@ -23,6 +23,9 @@ Settings -> Directories -><br>
     common/tests
     frontend/tests
 
+<br>
+Settings -> PHP -> CLI Interpreter -> добавляем из адреса [/usr/bin/php]<br><br>
+Settings -> PHP -> Test Frameworks -> проверить чтоб codeception был настроен
 
 ### Создание нового подобного проекта:
 
