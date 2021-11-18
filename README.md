@@ -1,3 +1,17 @@
+## Установка
+
+1. Создать локальный хост и базу данных
+
+2. ```sh
+   $ composer install
+   ```
+
+3. ```sh
+   $ php init
+   ```
+
+
+
 ### в PhpStorm:
 Settings -> Directories -><br>
 пометить <code>Excluded</code> папки:
