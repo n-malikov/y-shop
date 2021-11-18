@@ -36,6 +36,9 @@ Settings -> PHP -> Test Frameworks -> проверить чтоб codeception б
 0:39, мой composer.json отличается:<br>
 <code>"codeception/base": "^2.2.3",</code><br>
 <code>"codeception/verify": "~0.3.1",</code><br><br>
+ 
+Эмулятор packagist для фронта: [asset-packagist.org](https://asset-packagist.org/)
+<br><br>
 
 
 ### ДАЛЕЕ НЕ НУЖНО
