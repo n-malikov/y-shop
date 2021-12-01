@@ -10,6 +10,12 @@
    $ php init
    ```
 
+4. Vagrant<br>
+   Если нет, то скачиваем: [www.vagrantup.com/downloads](https://www.vagrantup.com/downloads)
+   ```sh
+   $ cp vagrant/config/vagrant-local.example.yml vagrant/config/vagrant-local.yml
+   ```
+   редачим <code>vagrant-local.yml</code>
 
 
 ### в PhpStorm:
