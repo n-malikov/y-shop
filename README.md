@@ -1,22 +1,32 @@
+## Подготовка
+
+Vagrant. Если нет, то скачиваем: [www.vagrantup.com/downloads](https://www.vagrantup.com/downloads) <br>
+PhpStorm с root-правами:<br>
+File -> Settings -> Tools -> Vagrant <br>
+в разделе «Environment variables» добавляем <code>SUDO_ASKPASS</code> с путем <code>/usr/bin/ssh-askpass</code>
+
 ## Установка
 
-1. Создать локальный хост и базу данных
-
-2. ```sh
+1. ```sh
    $ composer install
    ```
 
-3. ```sh
+2. ```sh
    $ php init
    ```
 
-4. Vagrant<br>
-   Если нет, то скачиваем: [www.vagrantup.com/downloads](https://www.vagrantup.com/downloads)
-   ```sh
+3. ```sh
    $ cp vagrant/config/vagrant-local.example.yml vagrant/config/vagrant-local.yml
    ```
-   редачим <code>vagrant-local.yml</code>
+   редачим <code>vagrant-local.yml</code> (github_token)<br><br>
 
+4. В файле<br>
+   <code>common/config/main-local.php</code><br>
+   редактируем доступы к БД, данные берем из<br>
+   <code>vagrant/provision/once-as-root.sh</code>
+5. ```sh
+   $ vagrant up
+   ```
 
 ### в PhpStorm:
 Settings -> Directories -><br>
