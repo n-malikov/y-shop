@@ -27,6 +27,11 @@ File -> Settings -> Tools -> Vagrant <br>
 5. ```sh
    $ vagrant up
    ```
+   (не нужно) еще команды вагранта:<br>
+   <code>vagrant ssh</code> подключение по SSH к виртуалке<br>
+   <code>vagrant reload</code> перезагрузить виртуалку<br>
+   <code>vagrant halt</code> выключить виртуалку<br>
+   <code>vagrant destroy</code> выключить и удалить виртуалку
 
 ### в PhpStorm:
 Settings -> Directories -><br>
