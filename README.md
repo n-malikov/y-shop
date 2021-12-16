@@ -1,4 +1,102 @@
-### в PhpStorm:
+## Требования
+
+- PHP 7.4
+- Composer >= 2.0
+
+## Установка
+
+1. ```sh
+   $ composer install
+   ```
+
+2. ```sh
+   $ php init
+   ```
+
+3. Создать локальный хост (сниппет Nginx есть ниже)
+
+## сниппет Nginx
+
+    server {
+        listen 80;
+        server_name y-shop.test;
+      
+        charset utf-8;
+        client_max_body_size 128M;
+        sendfile off;
+      
+        root  /var/www/y-shop/frontend/web;
+        index index.php;
+      
+        access_log /var/www/y-shop/vagrant/nginx/log/frontend-access.log;
+        error_log /var/www/y-shop/vagrant/nginx/log/frontend-error.log;
+      
+        location / {
+            try_files $uri $uri/ /index.php$is_args$args;
+        }
+      
+        location ~ \.php$ {
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+            try_files $uri =404;
+        }
+      
+        location ~ /\.(ht|svn|git) {
+            deny all;
+        }
+    }
+
+    server {
+        listen 80;
+        server_name y-shop-backend.test;
+      
+        charset utf-8;
+        client_max_body_size 128M;
+        sendfile off;
+      
+        root  /var/www/y-shop/backend/web;
+        index index.php;
+      
+        access_log /var/www/y-shop/vagrant/nginx/log/backend-access.log;
+        error_log /var/www/y-shop/vagrant/nginx/log/backend-error.log;
+      
+        location / {
+            try_files $uri $uri/ /index.php$is_args$args;
+        }
+      
+        location ~ \.php$ {
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+            try_files $uri =404;
+        }
+      
+        location ~ /\.(ht|svn|git) {
+            deny all;
+        }
+    }
+
+## если хочешь через Vagrant:
+
+скачиваем сам Vagrant: [www.vagrantup.com/downloads](https://www.vagrantup.com/downloads) <br>
+```sh
+$ cp vagrant/config/vagrant-local.example.yml vagrant/config/vagrant-local.yml
+```
+редачим <code>vagrant-local.yml</code> (github_token)<br>
+В файле<br>
+<code>common/config/main-local.php</code><br>
+редактируем доступы к БД, данные берем из<br>
+<code>vagrant/provision/once-as-root.sh</code> <br><br>
+
+Основные команды вагранта:<br>
+<code>vagrant up</code> запуск виртуалки<br>
+<code>vagrant ssh</code> подключение по SSH к виртуалке<br>
+<code>vagrant reload</code> перезагрузить виртуалку<br>
+<code>vagrant halt</code> выключить виртуалку<br>
+<code>vagrant destroy</code> выключить и удалить виртуалку
+
+## в PhpStorm:
 Settings -> Directories -><br>
 пометить <code>Excluded</code> папки:
 
@@ -23,6 +121,9 @@ Settings -> Directories -><br>
     common/tests
     frontend/tests
 
+<br>
+Settings -> PHP -> CLI Interpreter -> добавляем из адреса [/usr/bin/php]<br><br>
+Settings -> PHP -> Test Frameworks -> проверить чтоб codeception был настроен
 
 ### Создание нового подобного проекта:
 
@@ -33,6 +134,9 @@ Settings -> Directories -><br>
 0:39, мой composer.json отличается:<br>
 <code>"codeception/base": "^2.2.3",</code><br>
 <code>"codeception/verify": "~0.3.1",</code><br><br>
+ 
+Эмулятор packagist для фронта: [asset-packagist.org](https://asset-packagist.org/)
+<br><br>
 
 
 ### ДАЛЕЕ НЕ НУЖНО
