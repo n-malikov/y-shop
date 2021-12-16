@@ -1,9 +1,7 @@
-## Подготовка
+## Требования
 
-Vagrant. Если нет, то скачиваем: [www.vagrantup.com/downloads](https://www.vagrantup.com/downloads) <br>
-PhpStorm с root-правами:<br>
-File -> Settings -> Tools -> Vagrant <br>
-в разделе «Environment variables» добавляем <code>SUDO_ASKPASS</code> с путем <code>/usr/bin/ssh-askpass</code>
+- PHP 7.4
+- Composer >= 2.0
 
 ## Установка
 
@@ -15,25 +13,90 @@ File -> Settings -> Tools -> Vagrant <br>
    $ php init
    ```
 
-3. ```sh
-   $ cp vagrant/config/vagrant-local.example.yml vagrant/config/vagrant-local.yml
-   ```
-   редачим <code>vagrant-local.yml</code> (github_token)<br><br>
+3. Создать локальный хост (сниппет Nginx есть ниже)
 
-4. В файле<br>
-   <code>common/config/main-local.php</code><br>
-   редактируем доступы к БД, данные берем из<br>
-   <code>vagrant/provision/once-as-root.sh</code>
-5. ```sh
-   $ vagrant up
-   ```
-   (не нужно) еще команды вагранта:<br>
-   <code>vagrant ssh</code> подключение по SSH к виртуалке<br>
-   <code>vagrant reload</code> перезагрузить виртуалку<br>
-   <code>vagrant halt</code> выключить виртуалку<br>
-   <code>vagrant destroy</code> выключить и удалить виртуалку
+## сниппет Nginx
 
-### в PhpStorm:
+    server {
+        listen 80;
+        server_name y-shop.test;
+      
+        charset utf-8;
+        client_max_body_size 128M;
+        sendfile off;
+      
+        root  /var/www/y-shop/frontend/web;
+        index index.php;
+      
+        access_log /var/www/y-shop/vagrant/nginx/log/frontend-access.log;
+        error_log /var/www/y-shop/vagrant/nginx/log/frontend-error.log;
+      
+        location / {
+            try_files $uri $uri/ /index.php$is_args$args;
+        }
+      
+        location ~ \.php$ {
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+            try_files $uri =404;
+        }
+      
+        location ~ /\.(ht|svn|git) {
+            deny all;
+        }
+    }
+
+    server {
+        listen 80;
+        server_name y-shop-backend.test;
+      
+        charset utf-8;
+        client_max_body_size 128M;
+        sendfile off;
+      
+        root  /var/www/y-shop/backend/web;
+        index index.php;
+      
+        access_log /var/www/y-shop/vagrant/nginx/log/backend-access.log;
+        error_log /var/www/y-shop/vagrant/nginx/log/backend-error.log;
+      
+        location / {
+            try_files $uri $uri/ /index.php$is_args$args;
+        }
+      
+        location ~ \.php$ {
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+            try_files $uri =404;
+        }
+      
+        location ~ /\.(ht|svn|git) {
+            deny all;
+        }
+    }
+
+## если хочешь через Vagrant:
+
+скачиваем сам Vagrant: [www.vagrantup.com/downloads](https://www.vagrantup.com/downloads) <br>
+```sh
+$ cp vagrant/config/vagrant-local.example.yml vagrant/config/vagrant-local.yml
+```
+редачим <code>vagrant-local.yml</code> (github_token)<br>
+В файле<br>
+<code>common/config/main-local.php</code><br>
+редактируем доступы к БД, данные берем из<br>
+<code>vagrant/provision/once-as-root.sh</code> <br><br>
+
+Основные команды вагранта:<br>
+<code>vagrant up</code> запуск виртуалки<br>
+<code>vagrant ssh</code> подключение по SSH к виртуалке<br>
+<code>vagrant reload</code> перезагрузить виртуалку<br>
+<code>vagrant halt</code> выключить виртуалку<br>
+<code>vagrant destroy</code> выключить и удалить виртуалку
+
+## в PhpStorm:
 Settings -> Directories -><br>
 пометить <code>Excluded</code> папки:
 
