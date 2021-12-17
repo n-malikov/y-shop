@@ -23,10 +23,12 @@ class SiteController extends Controller
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
+                    // доступно для всех
                     [
                         'actions' => ['login', 'error'],
                         'allow' => true,
                     ],
+                    // доступно только для зарегистрированных
                     [
                         'actions' => ['logout', 'index'],
                         'allow' => true,
