@@ -20,6 +20,8 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
+            /*
+            // навесили в backend/config/main.php, поэтому от сюда удаляем
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
@@ -36,6 +38,7 @@ class SiteController extends Controller
                     ],
                 ],
             ],
+            */
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
