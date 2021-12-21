@@ -20,13 +20,17 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
+            /*
+            // навесили в backend/config/main.php, поэтому от сюда удаляем
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
+                    // доступно для всех
                     [
                         'actions' => ['login', 'error'],
                         'allow' => true,
                     ],
+                    // доступно только для зарегистрированных
                     [
                         'actions' => ['logout', 'index'],
                         'allow' => true,
@@ -34,6 +38,7 @@ class SiteController extends Controller
                     ],
                 ],
             ],
+            */
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

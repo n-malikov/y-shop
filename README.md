@@ -13,7 +13,14 @@
    $ php init
    ```
 
-3. Создать локальный хост (сниппет Nginx есть ниже)
+3. Создать базы данных ( <code>yii2shop</code>, <code>yii2shop_test</code> )
+
+4. ```sh
+   $ php yii migrate
+   $ php yii_test migrate
+   ```
+
+5. Создать локальный хост (сниппет Nginx есть ниже)
 
 ## сниппет Nginx
 

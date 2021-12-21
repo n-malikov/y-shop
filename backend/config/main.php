@@ -46,5 +46,18 @@ return [
         ],
         */
     ],
+    // добавляем глобавльное правило из backend/controllers/SiteController.php
+    // (lesson 1 2:53)
+    'as access' => [
+        'class' => 'yii\filters\AccessControl',
+        //'only'=> [], // к каким контролеррами применять правило
+        'except'=> ['site/login', 'site/error'], // контроллеры исключения
+        'rules' => [
+            [
+                'allow' => true,
+                'roles' => ['@'],
+            ],
+        ],
+    ],
     'params' => $params,
 ];
