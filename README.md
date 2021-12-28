@@ -22,6 +22,10 @@
 
 5. Создать локальный хост (сниппет Nginx есть ниже)
 
+## Дополнения:
+
+если хочешь не на поддомене, а на разных доменах, то поиграйся с <code>$params['domain']</code> в конфигах
+
 ## сниппет Nginx
 
     server {
@@ -56,7 +60,7 @@
 
     server {
         listen 80;
-        server_name y-shop-backend.test;
+        server_name backend.y-shop.test;
       
         charset utf-8;
         client_max_body_size 128M;

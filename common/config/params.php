@@ -6,4 +6,7 @@ return [
     'senderName' => 'Example.com mailer',
     'user.passwordResetTokenExpire' => 3600,
     'user.passwordMinLength' => 8,
+    // для единой авторизации на обоих доменах
+    'cookieValidationKey' => '',
+    'domain' => '.example.com',
 ];
