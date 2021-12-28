@@ -43,9 +43,11 @@ return [
             'yii_test',
         ],
         'setCookieValidationKey' => [
-            'backend/config/main-local.php',
+            // задаем места, где скрипт должен автоматически сгенерировать cookieValidationKey
+            'common/config/params-local.php',
+            //'backend/config/main-local.php',
             'common/config/codeception-local.php',
-            'frontend/config/main-local.php',
+            //'frontend/config/main-local.php',
         ],
     ],
     'Production' => [
