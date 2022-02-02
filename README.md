@@ -142,12 +142,14 @@ Settings -> PHP -> Test Frameworks -> проверить чтоб codeception б
     composer create-project --prefer-dist yiisoft/yii2-app-advanced PROJECT_NAME
 
 ### не забыть:
-0:39, мой composer.json отличается:<br>
+1 урок, 0:39 - мой composer.json отличается:<br>
 <code>"codeception/base": "^2.2.3",</code><br>
 <code>"codeception/verify": "~0.3.1",</code><br><br>
  
 Эмулятор packagist для фронта: [asset-packagist.org](https://asset-packagist.org/)
 <br><br>
+
+1 урок, 3:35 - скипнул кэш (memcached)
 
 
 ### ДАЛЕЕ НЕ НУЖНО

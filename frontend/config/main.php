@@ -27,6 +27,7 @@ return [
             ],
         ],
         'session' => [
+            // 'class' => 'yii\web\Session', - класс указывать не обязательно, он подставляется автоматически
             // this is the name of the session cookie used for login on the frontend
             //'name' => 'advanced-frontend',
             'name' => 'advanced-shop',
@@ -48,21 +49,11 @@ return [
             'errorAction' => 'site/error',
         ],
         // включаем ЧПУ
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-                // меняем ссылки на более удобные
-                '' => 'site/index',
-                //'about' => 'site/about',
-                '<_a:about|contact|signup|login>' => 'site/<_a>',
-
-                '<_c:[\w\-]+>' => '<_c>/index',
-                '<_c:[\w\-]+>/<id:\d+>' => '<_c>/view',
-                '<_c:[\w\-]+>/<_a:[\w-]+>' => '<_c>/<_a>',
-                '<_c:[\w\-]+>/<id:\d+>/<_a:[\w-]+>' => '<_c>/<_a>',
-            ],
-        ],
+        'backendUrlManager' => require __DIR__ . '/../../backend/config/urlManager.php',
+        'frontendUrlManager' => require __DIR__ . '/urlManager.php',
+        'urlManager' => function () {
+            return Yii::$app->get('frontendUrlManager');
+        },
     ],
     'params' => $params,
 ];

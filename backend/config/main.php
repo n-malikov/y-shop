@@ -10,7 +10,7 @@ return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log'], // чтоб логи запускались при старте приложения
     'modules' => [],
     'components' => [
         'request' => [
@@ -28,6 +28,7 @@ return [
             ],
         ],
         'session' => [
+            // 'class' => 'yii\web\Session', - класс указывать не обязательно, он подставляется автоматически
             // this is the name of the session cookie used for login on the backend
             //'name' => 'advanced-backend',
             'name' => 'advanced-shop',
@@ -48,14 +49,12 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
-        ],
-        */
+        // включаем ЧПУ
+        'backendUrlManager' => require __DIR__ . '/urlManager.php',
+        'frontendUrlManager' => require __DIR__ . '/../../frontend/config/urlManager.php',
+        'urlManager' => function () {
+            return Yii::$app->get('backendUrlManager');
+        },
     ],
     // добавляем глобавльное правило из backend/controllers/SiteController.php
     // (lesson 1 2:53)
