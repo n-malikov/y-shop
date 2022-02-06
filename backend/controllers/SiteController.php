@@ -81,7 +81,7 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        $this->layout = 'blank';
+        $this->layout = 'main-login'; // [from-learning] наша вьюшка формы входа
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
